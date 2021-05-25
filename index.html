@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>Join local JSON data with vector tile geometries</title>
+    <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="css/base.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <div class="filter fixed-position">
+        <select name="factor" id="filterFactor">
+            <option value="CO2PerCap" selected>CO2PerCap</option>
+            <option value="SDG72">SDG72</option>
+            <option value="TFCShareBySector">TFCShareBySector</option>
+        </select>
+        <select name="tfcFactors" id="tfcFactors" class="hide">
+            <option value="Transport" selected>Transport</option>
+            <option value="Industry">Industry</option>
+            <option value="Fishing">Fishing</option>
+            <option value="Residential">Residential</option>
+            <option value="Commercial and public services">Commercial and public services</option>
+            <option value="Agriculture / forestry">Agriculture / forestry</option>
+            <option value="Non-energy use">Non-energy use</option>
+            <option value="Non-specified">Non-specified</option>
+        </select>
+        <select name="year" id="year"></select>
+        <button id="btnFilterResult">Show me Data</button>
+        <button id="btnRemoveAll">Clear Map</button>
+    </div>
+    <div class="legend"></div>
+    <div class="float-right-top" id="userInfo">
+        <h3>Stars Collected: 20</h3>
+    </div>
+    <div class="zoom-level float-right-bottom">
+        <p>Zoom Levels:</p>
+        <button class="btn-zoom-level" data-level=11>City</button>
+        <button class="btn-zoom-level" data-level=6.5>State</button>
+        <button class="btn-zoom-level" data-level=3.6>Country</button>
+        <button class="btn-zoom-level" data-level=1.6>Global</button>
+    </div>
+    <div id="map"></div>
+
+
+
+    <script src="assets/data/countries.js"></script>
+    <script src="js/models/Preloader.js"></script>
+    <script src="js/config.js"></script>
+    <script src="js/util.js"></script>
+    <script src="js/api_Connection.js"></script>
+    <script src="js/templates.js"></script>
+    <script src="js/index.js"></script>
+    <script>
+       
+    </script>
+
+</body>
+
+</html>

@@ -1,0 +1,17 @@
+.hide {
+    display: none;
+}
+
+.float-right-bottom {
+    position: fixed;
+    right: 40px;
+    bottom: 40px;
+    z-index: 200;
+}
+
+.float-right-top {
+    position: fixed;
+    right: 40px;
+    top: 40px;
+    z-index: 200;
+}
