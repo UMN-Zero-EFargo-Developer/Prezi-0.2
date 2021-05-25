@@ -1,6 +1,6 @@
 # Prezi 0.2
 
-Prezi 0.2 is the refactor based on the early version.
+Prezi 0.2 is the refactor based on the early version. Preview the page at <http://www.efargo.org/prezi-dev/>.
 
 ## Changes
 

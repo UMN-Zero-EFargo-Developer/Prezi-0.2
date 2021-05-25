@@ -34,9 +34,9 @@ function getGlobalDataByYear(type, year, callback){
 /**
  * 
  * @param {String} factor - options: [ TFCShareBySector, CO2PerCap, SDG72 ]
- * @param {String} country - Optional
- * @param {String} startYear - Optional parameter, default value is "1990"
- * @param {String} endYear - Optional parameter
+ * @param {String} 
+ * @param {String} [startYear=1990]
+ * @param {String} [endYear] - 
  * @returns 
  */
 function dataUrl(factor, country, startYear=1990, endYear){

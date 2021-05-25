@@ -24,8 +24,7 @@ var map = new mapboxgl.Map({
     zoom: 1.8
 });
 
-// Data: UN Human Development Index 2017 Europe extract
-// Source: https://ourworldindata.org/human-development-index
+
 var data = [];
 
 map.on('load', function () {

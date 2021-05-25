@@ -50,7 +50,7 @@
 }
 
 /**
- * 
+ * This function helps you create DOM element from JSON-structured data.
  * @param {Object} node - An object that represent the structure of the DOM.
  * @param {string} node.type
  * @param {Object} [node.props]
