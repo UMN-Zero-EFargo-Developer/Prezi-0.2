@@ -8,7 +8,7 @@ The following changes enhance the web performance and code maintainability. The 
 
 - Data is fetched directly from IEA API remotely.
 - Replaced local country polygons by remote Mapbox country boundaries vector.
-- Replace Mapbox markers with Mapbox points layer that can be automatically created from the game data(coming soom). This will provide better performance and user experience.
+- Replace Mapbox markers with Mapbox points layer that is automatically created from the game data. This will provide better performance and user experience.
 - Loading animation is added.
 - Optimized fly-to behavior.
 - Zoom level buttons are added form easier zooming.
