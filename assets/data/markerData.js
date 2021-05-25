@@ -1,4 +1,4 @@
-const GAME_MARKER = [{
+const GAME_DATA = [{
     name: "ENERGY CHICKENS",
     location: "Berkeley, California",
     content: "<p><b>Who Played: </b>Emploees in an office setting</p><p>Energy Chickens is an online game for buildings where a reduction in enery positively affects a virtual farm of chickens where as, an increase in eneergy harms the health of the chickens. Keep your chickens healthy by reducing your energy!</p><p><b>Player Scale: </b>Building</p><p><b>Impact Scale: </b>People, Building</p>",
@@ -41,7 +41,7 @@ const GAME_MARKER = [{
     content: "<p>Online, single player game or multiplayer game that asks questions about your current energy saving strategies. Earn Points by completing real-world energy saving tasks in your own home and community. Do the tasks individually, with friends, or your family! Win by reaching the top tier and deeat Waste-a-Watt</p><p><b>Player Scale: </b>Individual, Small Groups</p><p><b>Impact Scale: </b>People, building, neighborhood, city</p>",
     website: "http://www.efargo.org/game/",
     location: "fargo",
-    coord: [-97.39985654586394, 46.14472845077884],
+    coord: [-96.7898, 46.8772],
 
 }, {
     name: "ENERGY CRISIS",

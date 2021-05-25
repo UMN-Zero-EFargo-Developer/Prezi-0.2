@@ -24,6 +24,20 @@ var map = new mapboxgl.Map({
     zoom: 1.8
 });
 
+const gameSource = "game-source";
+const pointLayer = "game-points";
+
+const gameCircles = {
+    'id': 'game-points',
+    'type': 'symbol',
+    'source': gameSource,
+    'layout': {
+        'icon-image': 'game', // reference the image
+        'icon-size': 0.25
+        },
+    'filter': ['==', '$type', 'Point']
+}
+
 
 var data = [];
 
@@ -55,9 +69,35 @@ map.on('load', function () {
                 addDataToMap(fetchedData);
             });
         }
-    })
+    });
+    
+    map.loadImage("../assets/image/game.png", (err, image) => {
+        if (err) {
+            throw err;
+        }
+
+        map.addImage('game', image);
+
+        loadPoints(GAME_DATA, gameCircles);
+    });
+    
 
 
+});
+
+map.on('click', pointLayer, function (e) {
+
+    var features = map.queryRenderedFeatures(e.point, {
+        layers: [pointLayer]
+    });
+    console.log(e.features[0]);
+    var feature = e.features[0];
+
+    var popup = new mapboxgl.Popup({
+        offset: [0,0]
+    }).setLngLat(feature.geometry.coordinates)
+    .setHTML(popup_HTML(feature.properties))
+    .addTo(map);
 });
 
 map.on('click', function (e) {
@@ -140,4 +180,15 @@ function removeLayerSource(mapLayer, mapSource) {
     if (map.getSource(mapSource)) {
         map.removeSource(mapSource);
     }
+}
+
+function loadPoints(data, pointConfig){
+    let geoData = makeGeoData(data);
+
+    map.addSource(gameSource, {
+        'type': 'geojson',
+        'data': geoData
+    });
+    console.log(geoData)
+    map.addLayer(pointConfig);
 }
