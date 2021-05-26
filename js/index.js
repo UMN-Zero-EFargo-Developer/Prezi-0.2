@@ -4,6 +4,7 @@ const yearFilter = document.querySelector("#year");
 const btnFilterResult = document.querySelector("#btnFilterResult");
 const btnRemoveAll = document.querySelector("#btnRemoveAll");
 const btnZoomLevels = document.querySelectorAll(".btn-zoom-level");
+const legend = document.querySelector(".legend");
 
 yearSelect("#year", 1990, 2019);
 factorFilter.value = FACTORS.CO2PerCap;
@@ -11,9 +12,10 @@ tfcFactorsFilter.value = TFC_FACTORS.transport;
 yearFilter.value = 1990;
 
 const mapStyles = {
-    frank: "mapbox://styles/aayang/cko38a1bp00dx17qty93kzxla",
+    frank: "mapbox://styles/aayang/cko38cbzf00he17mtkvtkw0xn",
     monochrome: 'mapbox://styles/aayang/ckfhnnlks0b7v19l7oxweshja',
-    dark: "mapbox://styles/aayang/ckhe5w9l707zu19obadmd6z7c"
+    dark: "mapbox://styles/aayang/ckhe5w9l707zu19obadmd6z7c",
+    satellite: "mapbox://styles/aayang/ckp4he3i76y7r17o06j376l9o"
 }
 
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWF5YW5nIiwiYSI6ImNrY3RxeXp5OTBqdHEycXFscnV0czY4ajQifQ.jtVkyvY29tGsCZSQlELYDA';
@@ -129,7 +131,7 @@ function addDataToMap(fetchedData){
         url: 'mapbox://mapbox.country-boundaries-v1'
     });
 
-    const maxValue = Math.max(...fetchedData.map(({value}) => value)) * 1.2;
+    const maxValue = Math.max(...fetchedData.map(({value}) => value)) * 1.5;
     console.log(fetchedData);
 
     fetchedData.forEach( item => {
@@ -157,6 +159,9 @@ function addDataToMap(fetchedData){
 
     // Last value is the default, used where there is no data
     matchExpression.push('rgba(0, 0, 0, 0)');
+
+    // Legend color cales
+    legend.style= `background:linear-gradient(180deg, ${hslToRgb(FACTOR_COLOR[factorFilter.value].h, FACTOR_COLOR[factorFilter.value].s, 0.3)} 0%, ${hslToRgb(FACTOR_COLOR[factorFilter.value].h, FACTOR_COLOR[factorFilter.value].s, 0.95)} 100%);`
 
     // Add layer from the vector tile source to create the choropleth
     // Insert it below the 'admin-1-boundary-bg' layer in the style
