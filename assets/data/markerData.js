@@ -463,3 +463,22 @@ const COUNTRY_MARKER = [{
     country: "netherlands",
     coord: [5.353000531850512, 52.02195377703737]
 }];
+
+const SCHOOLS = [
+    {
+        name: "Madison Elementary School",
+        coord: [-96.8271123, 46.887232]
+    },
+    {
+        name: "Rosevelt Elementary",
+        coord: [-96.79456545569813, 46.88794149540877]
+    },
+    {
+        name: "Ben Franklin Middle School",
+        coord: [-96.79137298892982, 46.89629909982955]
+    },
+    {
+        name: "Horace Mann Elementary School",
+        coord: [-96.78235752969555, 46.887616230771414]
+    }
+]

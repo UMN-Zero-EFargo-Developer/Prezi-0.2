@@ -45,6 +45,7 @@ var data = [];
 
 map.on('load', function () {
     
+    
 
     getGlobalDataByYear(FACTORS.CO2PerCap, "1990", fetchedData => {
         addDataToMap(fetchedData);
@@ -87,6 +88,14 @@ map.on('load', function () {
 
 });
 
+map.on('zoom', () => {
+    if (map.getZoom() >= 11 ) {
+        addSchoolMarkers(SCHOOLS);
+    } else {
+        removeAllSchoolMarkers();
+    }
+})
+
 map.on('click', pointLayer, function (e) {
 
     var features = map.queryRenderedFeatures(e.point, {
@@ -119,6 +128,22 @@ for (let i = 0; i < btnZoomLevels.length; i++) {
 btnRemoveAll.addEventListener("click", e => {
     removeLayerSource("countries-join", "countries")
 });
+
+/**
+ * ----------------------------
+ * ----------------------------
+ * ----------------------------
+ * ----------------------------
+ * 
+ * 
+ * Function Definitions
+ * 
+ * 
+ * ----------------------------
+ * ----------------------------
+ * ----------------------------
+ * ----------------------------
+ */
 
 function addDataToMap(fetchedData){
 
@@ -197,3 +222,37 @@ function loadPoints(data, pointConfig){
     console.log(geoData)
     map.addLayer(pointConfig);
 }
+
+
+
+function addSchoolMarkers(markerData) {
+  
+    markerData.forEach( marker => {
+        var popup = new mapboxgl.Popup().setHTML(
+            `<h5>${marker.name} </h5>`
+        );
+        
+        console.log(marker)
+      
+        var el = document.createElement("div");
+        el.className = "school_marker";
+        el.tyle = "background: white; height: 50px; width: 50px; z-index: 200;"
+      
+        // create the marker for User
+        var marker = new mapboxgl.Marker(el)
+          .setLngLat(marker.coord)
+          .setOffset([0, -20])
+          .setPopup(popup)
+          .addTo(map);
+    });
+    
+}
+
+let removeAllSchoolMarkers = function () {
+
+    const markers = document.querySelectorAll(".school_marker");
+
+    markers.forEach((marker) => {
+      marker.remove();
+    });
+  };

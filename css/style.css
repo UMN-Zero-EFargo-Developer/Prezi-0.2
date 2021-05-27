@@ -32,3 +32,10 @@ body {
     background-color: white;
     border: 2px solid white;
 }
+
+.mapboxgl-marker {
+    background: yellowgreen;
+    border-radius: 50%;
+    height: 30px;
+    width: 30px;
+}
