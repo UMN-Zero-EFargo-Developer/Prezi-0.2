@@ -1,6 +1,6 @@
 # Prezi 0.2
 
-Prezi 0.2 is the refactor based on the early version. Preview the page at <http://www.efargo.org/prezi-dev/>.
+Prezi 0.2 is the refactor based on the early version. Preview the page at <https://umn-zero-efargo-developer.github.io/Prezi-0.2/>.
 
 ## Changes
 
