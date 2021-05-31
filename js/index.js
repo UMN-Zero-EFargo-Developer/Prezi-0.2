@@ -22,9 +22,19 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWF5YW5nIiwiYSI6ImNrY3RxeXp5OTBqdHEycXFscnV0c
 var map = new mapboxgl.Map({
     container: 'map',
     style: mapStyles.frank,
-    center: [12, 50],
-    zoom: 1.8
+    center: [-96.7898, 46.8772],
+    zoom: 11.5
 });
+
+// Add geolocate control to the map.
+map.addControl(
+    new mapboxgl.GeolocateControl({
+        positionOptions: {
+            enableHighAccuracy: true
+        },
+        trackUserLocation: true
+    })
+);
 
 const gameSource = "game-source";
 const pointLayer = "game-points";
@@ -36,7 +46,7 @@ const gameCircles = {
     'layout': {
         'icon-image': 'game', // reference the image
         'icon-size': 0.25
-        },
+    },
     'filter': ['==', '$type', 'Point']
 }
 
@@ -44,18 +54,14 @@ const gameCircles = {
 var data = [];
 
 map.on('load', function () {
-    
-    
 
-    getGlobalDataByYear(FACTORS.CO2PerCap, "1990", fetchedData => {
-        addDataToMap(fetchedData);
-    });
+    addSchoolMarkers(SCHOOLS);
 
     factorFilter.addEventListener("change", e => {
         if (e.target.value === "TFCShareBySector") {
             tfcFactorsFilter.classList.remove("hide");
         } else {
-            tfcFactorsFilter.classList.add("hide"); 
+            tfcFactorsFilter.classList.add("hide");
         }
     });
 
@@ -73,8 +79,8 @@ map.on('load', function () {
             });
         }
     });
-    
-    map.loadImage("../assets/image/game.png", (err, image) => {
+
+    map.loadImage("https://firebasestorage.googleapis.com/v0/b/asset-host-aayang.appspot.com/o/game.png?alt=media&token=795fbdee-a6cd-4f08-b4ca-4c7c5d9059dd", (err, image) => {
         if (err) {
             throw err;
         }
@@ -83,13 +89,13 @@ map.on('load', function () {
 
         loadPoints(GAME_DATA, gameCircles);
     });
-    
+
 
 
 });
 
 map.on('zoom', () => {
-    if (map.getZoom() >= 11 ) {
+    if (map.getZoom() >= 11) {
         addSchoolMarkers(SCHOOLS);
     } else {
         removeAllSchoolMarkers();
@@ -105,17 +111,17 @@ map.on('click', pointLayer, function (e) {
     var feature = e.features[0];
 
     var popup = new mapboxgl.Popup({
-        offset: [0,0]
-    }).setLngLat(feature.geometry.coordinates)
-    .setHTML(popup_HTML(feature.properties))
-    .addTo(map);
+            offset: [0, 0]
+        }).setLngLat(feature.geometry.coordinates)
+        .setHTML(popup_HTML(feature.properties))
+        .addTo(map);
 });
 
 map.on('click', function (e) {
     console.log(e.lngLat);
     map.flyTo({
-    center: e.lngLat,
-    essential: true
+        center: e.lngLat,
+        essential: true
     });
 });
 
@@ -145,7 +151,7 @@ btnRemoveAll.addEventListener("click", e => {
  * ----------------------------
  */
 
-function addDataToMap(fetchedData){
+function addDataToMap(fetchedData) {
 
 
     // Add source for country polygons using the Mapbox Countries tileset
@@ -156,15 +162,20 @@ function addDataToMap(fetchedData){
         url: 'mapbox://mapbox.country-boundaries-v1'
     });
 
-    const maxValue = Math.max(...fetchedData.map(({value}) => value)) * 1.5;
+    const maxValue = Math.max(...fetchedData.map(({
+        value
+    }) => value)) * 1.5;
     console.log(fetchedData);
 
-    fetchedData.forEach( item => {
+    fetchedData.forEach(item => {
         // console.log(item.value/30);
         if (item.value) {
-                data.push({ 'code': item.country, 'hdi': 1-item.value/maxValue});
+            data.push({
+                'code': item.country,
+                'hdi': 1 - item.value / maxValue
+            });
         }
-            
+
     });
 
     console.log(data);
@@ -186,7 +197,7 @@ function addDataToMap(fetchedData){
     matchExpression.push('rgba(0, 0, 0, 0)');
 
     // Legend color cales
-    legend.style= `background:linear-gradient(180deg, ${hslToRgb(FACTOR_COLOR[factorFilter.value].h, FACTOR_COLOR[factorFilter.value].s, 0.3)} 0%, ${hslToRgb(FACTOR_COLOR[factorFilter.value].h, FACTOR_COLOR[factorFilter.value].s, 0.95)} 100%);`
+    legend.style = `background:linear-gradient(180deg, ${hslToRgb(FACTOR_COLOR[factorFilter.value].h, FACTOR_COLOR[factorFilter.value].s, 0.3)} 0%, ${hslToRgb(FACTOR_COLOR[factorFilter.value].h, FACTOR_COLOR[factorFilter.value].s, 0.95)} 100%);`
 
     // Add layer from the vector tile source to create the choropleth
     // Insert it below the 'admin-1-boundary-bg' layer in the style
@@ -212,7 +223,7 @@ function removeLayerSource(mapLayer, mapSource) {
     }
 }
 
-function loadPoints(data, pointConfig){
+function loadPoints(data, pointConfig) {
     let geoData = makeGeoData(data);
 
     map.addSource(gameSource, {
@@ -226,26 +237,28 @@ function loadPoints(data, pointConfig){
 
 
 function addSchoolMarkers(markerData) {
-  
-    markerData.forEach( marker => {
+
+    markerData.forEach(marker => {
         var popup = new mapboxgl.Popup().setHTML(
-            `<h5>${marker.name} </h5>`
+            `<h5>${marker.name} </h5>
+            <p>Score: ${marker.score}</p>`
         );
-        
+
         console.log(marker)
-      
+
         var el = document.createElement("div");
+        el.innerHTML = "Score:" + marker.score;
         el.className = "school_marker";
         el.tyle = "background: white; height: 50px; width: 50px; z-index: 200;"
-      
+
         // create the marker for User
         var marker = new mapboxgl.Marker(el)
-          .setLngLat(marker.coord)
-          .setOffset([0, -20])
-          .setPopup(popup)
-          .addTo(map);
+            .setLngLat(marker.coord)
+            .setOffset([0, -20])
+            .setPopup(popup)
+            .addTo(map);
     });
-    
+
 }
 
 let removeAllSchoolMarkers = function () {
@@ -253,6 +266,6 @@ let removeAllSchoolMarkers = function () {
     const markers = document.querySelectorAll(".school_marker");
 
     markers.forEach((marker) => {
-      marker.remove();
+        marker.remove();
     });
-  };
+};

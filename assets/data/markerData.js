@@ -467,18 +467,22 @@ const COUNTRY_MARKER = [{
 const SCHOOLS = [
     {
         name: "Madison Elementary School",
-        coord: [-96.8271123, 46.887232]
+        coord: [-96.8271123, 46.887232],
+        score: 201
     },
     {
         name: "Rosevelt Elementary",
-        coord: [-96.79456545569813, 46.88794149540877]
+        coord: [-96.79456545569813, 46.88794149540877],
+        score: 201
     },
     {
         name: "Ben Franklin Middle School",
-        coord: [-96.79137298892982, 46.89629909982955]
+        coord: [-96.79137298892982, 46.89629909982955],
+        score: 184
     },
     {
         name: "Horace Mann Elementary School",
-        coord: [-96.78235752969555, 46.887616230771414]
+        coord: [-96.78235752969555, 46.887616230771414],
+        score: 246
     }
 ]
