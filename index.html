@@ -3,8 +3,10 @@
 
 <head>
     <meta charset="utf-8">
-    <title>Join local JSON data with vector tile geometries</title>
+    <title>Prezi</title>
     <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.css" rel="stylesheet">
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.2.0/mapbox-gl.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
@@ -14,6 +16,7 @@
 </head>
 
 <body>
+    <i class="fas fa-bars" id="btnMenu"></i>
     <div class="filter fixed-position">
         <select name="factor" id="filterFactor">
             <option value="CO2PerCap" selected>Carbon Emission</option>
@@ -36,7 +39,7 @@
     </div>
     <div class="legend"></div>
     <div class="float-right-top" id="userInfo">
-        <h3>Stars Collected: 20</h3>
+        <h3></h3>
     </div>
     <div class="zoom-level float-right-bottom">
         <p>Zoom Levels:</p>
@@ -57,6 +60,7 @@
     <script src="js/mapUtil.js"></script>
     <script src="js/api_Connection.js"></script>
     <script src="js/templates.js"></script>
+    <script src="js/uiController.js"></script>
     <script src="js/index.js"></script>
     <script>
        

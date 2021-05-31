@@ -244,8 +244,6 @@ function addSchoolMarkers(markerData) {
             <p>Score: ${marker.score}</p>`
         );
 
-        console.log(marker)
-
         var el = document.createElement("div");
         el.innerHTML = "Score:" + marker.score;
         el.className = "school_marker";

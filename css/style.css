@@ -13,9 +13,21 @@ body {
 
 .filter {
     position: fixed;
-    top: 40px;
-    left: 40px;
+    padding: 16px;
+    padding-top: 56px;
+    width: 50%;
+    top: 0;
+    left: 0;
+    background: white;
+    box-shadow: 2px 2px 8px rgba(0, 0, 0, 0.5);
     z-index: 100
+}
+
+.filter select,
+.filter button {
+    height: 32px;
+    width: 100%;
+    margin-bottom: 15px;
 }
 
 .mapboxgl-popup {
@@ -38,4 +50,39 @@ body {
     border-radius: 50%;
     height: 30px;
     width: 30px;
+}
+
+#btnMenu {
+    position: fixed;
+    height: 44px;
+    width: 44px;
+    left: 8px;
+    top: 0px;
+    font-size: 1.6em;
+    text-align: center;
+    line-height: 1.8em;
+    z-index: 1000;
+}
+
+@media only screen and (min-width: 600px)  {
+    #btnMenu {
+        display: none;
+    }
+
+    .filter {
+        padding: 16px;
+        padding-top: 20px;
+        width: auto;
+        top: 0;
+        left: 0;
+        background: none;
+        box-shadow: none;
+    }
+    
+    .filter select,
+    .filter button {
+        height: 32px;
+        width: auto;
+        margin-bottom: 15px;
+    }
 }
