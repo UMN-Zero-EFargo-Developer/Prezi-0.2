@@ -80,7 +80,7 @@ map.on('load', function () {
         }
     });
 
-    map.loadImage("https://firebasestorage.googleapis.com/v0/b/asset-host-aayang.appspot.com/o/game.png?alt=media&token=795fbdee-a6cd-4f08-b4ca-4c7c5d9059dd", (err, image) => {
+    map.loadImage("../assets/image/game.png", (err, image) => {
         if (err) {
             throw err;
         }
