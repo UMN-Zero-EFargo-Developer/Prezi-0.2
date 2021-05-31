@@ -80,7 +80,7 @@ map.on('load', function () {
         }
     });
 
-    map.loadImage("../assets/image/game.png", (err, image) => {
+    map.loadImage("/../assets/image/game.png", (err, image) => {
         if (err) {
             throw err;
         }
