@@ -182,6 +182,10 @@ btnRemoveAll.addEventListener("click", e => {
     removeLayerSource("countries-join", "countries")
 });
 
+
+
+
+
 /**
  * ----------------------------
  * ----------------------------
