@@ -24,7 +24,7 @@ var map = new mapboxgl.Map({
     style: mapStyles.game,
     center: [-96.7898, 46.8772],
     zoom: 16,
-    pitch: 60,
+    pitch: 70,
     bearing: 160
 });
 
@@ -37,6 +37,7 @@ map.addControl(
         trackUserLocation: true
     })
 );
+
 
 const gameSource = "game-source";
 const pointLayer = "game-points";
@@ -57,50 +58,43 @@ var data = [];
 
 map.on('load', function () {
 
-    map.setFog({
-        'range': [-1, 1.5],
-        'color': 'white',
-        'horizon-blend': 0.1
-        });
-
     // The 'building' layer in the Mapbox Streets
-            // vector tileset contains building height data
-            // from OpenStreetMap.
-            map.addLayer({
-                'id': 'add-3d-buildings',
-                'source': 'composite',
-                'source-layer': 'building',
-                'filter': ['==', 'extrude', 'true'],
-                'type': 'fill-extrusion',
-                'minzoom': 15,
-                'paint': {
-                    'fill-extrusion-color': '#ffcc00',
+    // vector tileset contains building height data
+    // from OpenStreetMap.
+    map.addLayer({
+        'id': 'add-3d-buildings',
+        'source': 'composite',
+        'source-layer': 'building',
+        'filter': ['==', 'extrude', 'true'],
+        'type': 'fill-extrusion',
+        'minzoom': 15,
+        'paint': {
+            'fill-extrusion-color': '#ffcc00',
 
-                    // Use an 'interpolate' expression to
-                    // add a smooth transition effect to
-                    // the buildings as the user zooms in.
-                    'fill-extrusion-height': [
-                        'interpolate',
-                        ['linear'],
-                        ['zoom'],
-                        15,
-                        0,
-                        15.05,
-                        ['get', 'height']
-                    ],
-                    'fill-extrusion-base': [
-                        'interpolate',
-                        ['linear'],
-                        ['zoom'],
-                        15,
-                        0,
-                        15.05,
-                        ['get', 'min_height']
-                    ],
-                    'fill-extrusion-opacity': 0.6
-                }
-            },
-        );
+            // Use an 'interpolate' expression to
+            // add a smooth transition effect to
+            // the buildings as the user zooms in.
+            'fill-extrusion-height': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                15,
+                0,
+                15.05,
+                ['get', 'height']
+            ],
+            'fill-extrusion-base': [
+                'interpolate',
+                ['linear'],
+                ['zoom'],
+                15,
+                0,
+                15.05,
+                ['get', 'min_height']
+            ],
+            'fill-extrusion-opacity': 0.6
+        }
+    }, );
 
     addSchoolMarkers(SCHOOLS);
 
@@ -140,6 +134,16 @@ map.on('load', function () {
 
 
 });
+
+if (map.isStyleLoaded()) {
+    // Add fog
+    map.setFog({
+        'range': [-1, 1.5],
+        'color': 'white',
+        'horizon-blend': 0.1
+    });
+}
+
 
 map.on('zoom', () => {
     if (map.getZoom() >= 11) {
