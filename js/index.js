@@ -18,14 +18,23 @@ const mapStyles = {
     satellite: "mapbox://styles/aayang/ckp4he3i76y7r17o06j376l9o"
 }
 
+const powerPlantIcons = {
+    "petroleum": "/power_gas_petroleum.png",
+    "gas": "/power_gas_petroleum.png",
+    "gas,petroleum": "/power_gas_petroleum.png",
+    "Wind": "/power_wind.png",
+    "Coal": "/power_coal.png",
+    "Hydro": "/power_hydro.png",
+    "Landfill": "/power_landfill.png",
+    "water-source": "/source_water.png"
+}
+
 mapboxgl.accessToken = 'pk.eyJ1IjoiYWF5YW5nIiwiYSI6ImNrY3RxeXp5OTBqdHEycXFscnV0czY4ajQifQ.jtVkyvY29tGsCZSQlELYDA';
 var map = new mapboxgl.Map({
     container: 'map',
     style: mapStyles.game,
-    center: [-96.7898, 46.8772],
-    zoom: 16,
-    pitch: 70,
-    bearing: 160
+    center: [-100.55228966679601, 47.4565405362537],
+    zoom: 7
 });
 
 // Add geolocate control to the map.
@@ -96,7 +105,7 @@ map.on('load', function () {
         }
     }, );
 
-    addSchoolMarkers(SCHOOLS);
+    addPowerMarkers(powerPlants.features);
 
     factorFilter.addEventListener("change", e => {
         if (e.target.value === "TFCShareBySector") {
@@ -144,13 +153,23 @@ if (map.isStyleLoaded()) {
     });
 }
 
-
+let isUpdating = true;
 map.on('zoom', () => {
-    if (map.getZoom() >= 11) {
-        addSchoolMarkers(SCHOOLS);
-    } else {
-        removeAllSchoolMarkers();
-    }
+    
+        if (map.getZoom() >= 12) {
+            if (isUpdating) {
+                addPlayerMarkers(Players);
+                isUpdating = false;
+            }
+            
+        } else {
+            if (!isUpdating) {
+                removeAllSchoolMarkers();
+                isUpdating = true;
+            }
+            
+        }
+    
 })
 
 map.on('click', pointLayer, function (e) {
@@ -170,16 +189,12 @@ map.on('click', pointLayer, function (e) {
 
 map.on('click', function (e) {
     console.log(e.lngLat);
-    map.flyTo({
-        center: e.lngLat,
-        essential: true
-    });
 });
 
 for (let i = 0; i < btnZoomLevels.length; i++) {
     btnZoomLevels[i].addEventListener("click", e => {
         map.zoomTo(e.target.dataset.level);
-    })
+    });
 }
 
 btnRemoveAll.addEventListener("click", e => {
@@ -291,7 +306,9 @@ function loadPoints(data, pointConfig) {
 
 
 
-function addSchoolMarkers(markerData) {
+function addPlayerMarkers(markerData) {
+
+    console.log("add marker");
 
     markerData.forEach(marker => {
         var popup = new mapboxgl.Popup().setHTML(
@@ -302,11 +319,34 @@ function addSchoolMarkers(markerData) {
         var el = document.createElement("div");
         el.innerHTML = "Score:" + marker.score;
         el.className = "school_marker";
-        el.tyle = "background: white; height: 50px; width: 50px; z-index: 200;"
+        el.style = `background: url("../assets/image/${marker.image}"); background-size: cover; height: 50px; width: 50px;`;
 
         // create the marker for User
         var marker = new mapboxgl.Marker(el)
             .setLngLat(marker.coord)
+            .setOffset([0, -20])
+            .setPopup(popup)
+            .addTo(map);
+    });
+
+}
+
+function addPowerMarkers(markerData) {
+
+    markerData.forEach(marker => {
+        var popup = new mapboxgl.Popup().setHTML(
+            `<h3>${marker.properties.Name} </h3>
+            <p>County: ${marker.properties.Location}</p>
+            <p>Capacity: ${marker.properties.Capacity}</p>`
+        );
+            console.log(powerPlantIcons[marker.properties.FuelType]);
+        var el = document.createElement("div");
+        el.className = "power_marker";
+        el.style = `background: url("../assets/image${powerPlantIcons[marker.properties.FuelType]}"); background-size: cover; height: 50px; width: 50px;`;
+
+        // create the marker for User
+        var marker = new mapboxgl.Marker(el)
+            .setLngLat(marker.geometry.coordinates)
             .setOffset([0, -20])
             .setPopup(popup)
             .addTo(map);

@@ -464,25 +464,29 @@ const COUNTRY_MARKER = [{
     coord: [5.353000531850512, 52.02195377703737]
 }];
 
-const SCHOOLS = [
+const Players = [
     {
-        name: "Madison Elementary School",
+        name: "Amy",
         coord: [-96.8271123, 46.887232],
-        score: 201
+        score: 201, 
+        image: "avatar1.png"
     },
     {
-        name: "Rosevelt Elementary",
+        name: "Mike",
         coord: [-96.79456545569813, 46.88794149540877],
-        score: 201
+        score: 201, 
+        image: "avatar2.png"
     },
     {
-        name: "Ben Franklin Middle School",
+        name: "Jason",
         coord: [-96.79137298892982, 46.89629909982955],
-        score: 184
+        score: 184, 
+        image: "avatar3.png"
     },
     {
-        name: "Horace Mann Elementary School",
+        name: "Lily",
         coord: [-96.78235752969555, 46.887616230771414],
-        score: 246
+        score: 246, 
+        image: "avatar4.png"
     }
 ]
