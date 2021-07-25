@@ -4,7 +4,8 @@ const GAME_DATA = [{
     content: "<p><b>Who Played: </b>Emploees in an office setting</p><p>Energy Chickens is an online game for buildings where a reduction in enery positively affects a virtual farm of chickens where as, an increase in eneergy harms the health of the chickens. Keep your chickens healthy by reducing your energy!</p><p><b>Player Scale: </b>Building</p><p><b>Impact Scale: </b>People, Building</p>",
     website: "http://energychickens.weebly.com/",
     location: "berkeley",
-    coord: [-121.57563791616394, 36.97811012914602]
+    coord: [-121.57563791616394, 36.97811012914602],
+    connected: true
 }, {
     name: "OFFSET!",
     location: "Pasadena, California",
@@ -19,7 +20,7 @@ const GAME_DATA = [{
     website: "https://www.neok12.com/diagram/Energy-Sources-01.htm",
     location: "walnut",
     coord: [-117.11425781249935, 33.9370888399862],
-
+    connected: true
 }, {
     name: "LUDWIG",
     location: "Bellevue, Washington",
@@ -27,7 +28,7 @@ const GAME_DATA = [{
     website: "https://store.steampowered.com/app/263120/Ludwig/",
     location: "bellevue",
     coord: [-122.47558593749939, 46.94510196652902],
-
+    connected: true
 }, {
     name: "SAVE THE WORLD",
     location: "Calgary, Alberta",
@@ -42,7 +43,7 @@ const GAME_DATA = [{
     website: "http://www.efargo.org/game/",
     location: "fargo",
     coord: [-96.7898, 46.8772],
-
+    connected: true
 }, {
     name: "ENERGY CRISIS",
     location: "Minneapolis, Minnesota",
@@ -62,7 +63,7 @@ const GAME_DATA = [{
     content: "<p>Energize is an online game that challenges you to provide electricity to a growing community while keeping pollution minimized. You must use a conbination of energy sources to achieve the best balance between economic nees and environmental concerns for the city</p><p><b>Player Scale: </b>Individual</p><p><b>Impact Scale: </b>People</p>",
     location: "florida",
     coord: [-82.1534339433577, 28.93858968604546],
-
+    connected: true
 }, {
     name: "WINDFALL",
     location: "Atlanta, Georgia",
@@ -76,7 +77,7 @@ const GAME_DATA = [{
     content: "<p>Multiplayer board game where each player is the president of their own energy corporation, developing energy srouces to sell. Win the game by collecting the most KwH receipts by landing on your own power sites</p><p><b>Player Scale: </b>Small groups</p><p><b>Impact Scale: </b>People</p>",
     location: "columbia",
     coord: [-81.0736904416978, 33.992899986725604],
-
+    connected: true
 }, {
     name: "NICO THE NINJA",
     location: "Fort Mills, South Carolina",
@@ -91,7 +92,7 @@ const GAME_DATA = [{
     website: "https://www.kickstarter.com/projects/379986539/game-of-energy-board-game",
     location: "lexington",
     coord: [-84.5014705082113, 38.04409121218319],
-
+    connected: true
 }, {
     name: "FIND THE POWER BANDIT",
     location: "Columbus, Ohio",
@@ -143,7 +144,7 @@ const GAME_DATA = [{
     content: "<p>A defining feature of Kukui Cup challenges is a blend of real world and online activities, all utilizing game mechanics. In the real world, players participate in workshops and excursions, win prizes, and most importantly, learn about their current lifestyle and its impact on energy consumption. In the online world of the Kukui Cup web application, players earn points, achieve badfes, increase their sustainability 'literacy' through readin and videos, and use social networking mechanisms to engage with friends and family about the issues raised</p><p><b>Player Scale: </b>Large groups</p><p><b>Impact Scale: </b>People, Building, Neighborhood</p>",
     location: "honolulu",
     coord: [-157.8568516785772, 21.303155822374862],
-
+    connected: true
 }, {
     name: "UNTITLED (MESQUITA ET AL)",
     location: "Sao Paulo",
@@ -468,25 +469,29 @@ const Players = [
     {
         name: "Amy",
         coord: [-96.8271123, 46.887232],
-        score: 201, 
+        score: 220, 
+        rank: 2,
         image: "avatar1.png"
     },
     {
         name: "Mike",
         coord: [-96.79456545569813, 46.88794149540877],
         score: 201, 
+        rank: 3,
         image: "avatar2.png"
     },
     {
         name: "Jason",
         coord: [-96.79137298892982, 46.89629909982955],
-        score: 184, 
+        score: 154, 
+        rank: 4,
         image: "avatar3.png"
     },
     {
         name: "Lily",
         coord: [-96.78235752969555, 46.887616230771414],
         score: 246, 
+        rank: 1,
         image: "avatar4.png"
     }
 ]

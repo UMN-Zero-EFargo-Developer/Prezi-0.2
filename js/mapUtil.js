@@ -1,11 +1,9 @@
-
-
 /**
  * 
  * @param {Object} dataObj 
  * @returns 
  */
- function makeGeoData(dataObj){
+function makeGeoData(dataObj) {
     console.log(dataObj);
     let geoData = {
         features: [],
@@ -38,7 +36,7 @@ function makeGeoFeature(data) {
     return geoFeature;
 };
 
-function loadPoints(data, pointConfig){
+function loadPoints(data, pointConfig) {
     let geoData = makeGeoData(data);
 
     map.addSource(pointSource, {
@@ -60,13 +58,13 @@ function popup_HTML(featureObj) {
         <h3 class="popup-title">${featureObj.name}</h3>
         <div class="popup-body">${featureObj.content}${websiteBtn}</div>
     </div>`
-    
+
     return container;
 }
 
-function addMarker(markerData, popupModel) {    
+function addMarker(markerData, popupModel) {
 
-    let content =`<div class="row">
+    let content = `<div class="row">
                     <div class="col-4"><img class="user-photo" src="${markerData.image}"/></div>
                     <div class="col-8">
                     <h5>${markerData.gameName}</h5>
@@ -92,4 +90,49 @@ function addMarker(markerData, popupModel) {
         .setOffset([0, -60])
         .setPopup(popup)
         .addTo(map);
+}
+
+function drawLine(source) {
+    map.addSource('route', source);
+    map.addLayer({
+        'id': 'route',
+        'type': 'line',
+        'source': 'route',
+        'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': '#888',
+            'line-width': 4
+        }
+    });
+    console.log("point added")
+}
+
+const lineLayer = (data) => {
+
+    const lineLayer = {
+        type: "FeatureCollection",
+        features: []
+    };
+
+    for (let i = 0; i < data.features.length; i++) {
+        if (data.features[i].properties.connected) {
+            const newFeature = {
+                'type': 'Feature',
+                'properties': {},
+                'geometry': {
+                    'type': 'LineString',
+                    'coordinates': [
+                        [-96.790494, 46.875552],
+                        data.features[i].geometry.coordinates
+                    ]
+                }
+            }
+            lineLayer.features.push(newFeature);
+        }
+
+    }
+    return lineLayer;
 }

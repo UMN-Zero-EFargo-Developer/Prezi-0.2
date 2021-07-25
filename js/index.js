@@ -5,6 +5,8 @@ const btnFilterResult = document.querySelector("#btnFilterResult");
 const btnRemoveAll = document.querySelector("#btnRemoveAll");
 const btnZoomLevels = document.querySelectorAll(".btn-zoom-level");
 const legend = document.querySelector(".legend");
+const btnDraw = document.querySelector("#btnDraw");
+const btnClearLine = document.querySelector("#btnClearLine");
 
 yearSelect("#year", 1990, 2019);
 factorFilter.value = FACTORS.CO2PerCap;
@@ -33,8 +35,8 @@ mapboxgl.accessToken = 'pk.eyJ1IjoiYWF5YW5nIiwiYSI6ImNrY3RxeXp5OTBqdHEycXFscnV0c
 var map = new mapboxgl.Map({
     container: 'map',
     style: mapStyles.game,
-    center: [-100.55228966679601, 47.4565405362537],
-    zoom: 7
+    center: [-96.81804652879511, 46.8866638154534],
+    zoom: 13.5
 });
 
 // Add geolocate control to the map.
@@ -66,6 +68,27 @@ const gameCircles = {
 var data = [];
 
 map.on('load', function () {
+
+    map.addSource('lines', {
+        'type': 'geojson',
+        'data': lineLayer(powerPlants)
+    });
+
+    map.addLayer({
+        'id': 'net-lines',
+        'type': 'line',
+        'source': 'lines',
+        'layout': {
+            'line-join': 'round',
+            'line-cap': 'round'
+        },
+        'paint': {
+            'line-color': '#888',
+            'line-width': 2,
+            'line-opacity': 0.3,
+            'line-dasharray': [1, 2]
+        }
+    });
 
     // The 'building' layer in the Mapbox Streets
     // vector tileset contains building height data
@@ -153,17 +176,21 @@ if (map.isStyleLoaded()) {
     });
 }
 
+
 let isUpdating = true;
 map.on('zoom', () => {
     
         if (map.getZoom() >= 12) {
+            
             if (isUpdating) {
+                console.log("is updating")
                 addPlayerMarkers(Players);
                 isUpdating = false;
             }
             
         } else {
             if (!isUpdating) {
+                console.log("not updating")
                 removeAllSchoolMarkers();
                 isUpdating = true;
             }
@@ -187,8 +214,64 @@ map.on('click', pointLayer, function (e) {
         .addTo(map);
 });
 
+
+// ================== Draw Lines =======================
+
+let isDrawing = false;
+
+btnDraw.addEventListener("click", (e) => {
+    if (isDrawing === false) {
+        isDrawing = true;
+        e.target.innerHTML = "Stop Drawing";
+    } else {
+        isDrawing = false;
+        e.target.innerHTML = "Draw Lines";
+    }
+    
+});
+
+const lineSource = {
+    'type': 'geojson',
+    'data': {
+        'type': 'Feature',
+        'properties': {
+            index: 0
+        },
+        'geometry': {
+            'type': 'LineString',
+            'coordinates': []
+        }
+    }
+}
+
+map.doubleClickZoom.disable();
+
 map.on('click', function (e) {
+
     console.log(e.lngLat);
+    lineSource.data.properties.index++;
+
+    if(isDrawing && lineSource.data.properties.index > 0) {
+        // TODO: draw line
+        removeLayerSource("route", "route");
+        lineSource.data.geometry.coordinates.push([e.lngLat.lng, e.lngLat.lat])
+        drawLine(lineSource);
+
+        window.addEventListener("dblclick", () => {
+            isDrawing = false;
+            btnDraw.innerHTML = "Draw Lines";
+        });
+    }
+
+});
+
+btnClearLine.addEventListener("click", e => {
+    if (isDrawing === true) {
+        isDrawing = false;
+    }
+    removeLayerSource("route", "route");
+    lineSource.data.properties.index = 0;
+    lineSource.data.geometry.coordinates = [];
 });
 
 for (let i = 0; i < btnZoomLevels.length; i++) {
@@ -312,15 +395,10 @@ function addPlayerMarkers(markerData) {
 
     markerData.forEach(marker => {
         var popup = new mapboxgl.Popup().setHTML(
-            `<h5>${marker.name} </h5>
-            <p>Score: ${marker.score}</p>`
+            playerPopup(marker)
         );
 
-        var el = document.createElement("div");
-        el.innerHTML = "Score:" + marker.score;
-        el.className = "school_marker";
-        el.style = `background: url("../assets/image/${marker.image}"); background-size: cover; height: 50px; width: 50px;`;
-
+        var el = playerMarker(marker);
         // create the marker for User
         var marker = new mapboxgl.Marker(el)
             .setLngLat(marker.coord)
@@ -334,15 +412,16 @@ function addPlayerMarkers(markerData) {
 function addPowerMarkers(markerData) {
 
     markerData.forEach(marker => {
-        var popup = new mapboxgl.Popup().setHTML(
-            `<h3>${marker.properties.Name} </h3>
-            <p>County: ${marker.properties.Location}</p>
-            <p>Capacity: ${marker.properties.Capacity}</p>`
-        );
-            console.log(powerPlantIcons[marker.properties.FuelType]);
+        var popup = new mapboxgl.Popup().setHTML(powerPopup(marker));
+
         var el = document.createElement("div");
         el.className = "power_marker";
         el.style = `background: url("../assets/image${powerPlantIcons[marker.properties.FuelType]}"); background-size: cover; height: 50px; width: 50px;`;
+
+        if (marker.properties.connected) {
+            el.style.border = "2px solid #006633";
+            el.style.borderRadius = "50%";
+        }
 
         // create the marker for User
         var marker = new mapboxgl.Marker(el)
@@ -356,7 +435,7 @@ function addPowerMarkers(markerData) {
 
 let removeAllSchoolMarkers = function () {
 
-    const markers = document.querySelectorAll(".school_marker");
+    const markers = document.querySelectorAll(".player-marker");
 
     markers.forEach((marker) => {
         marker.remove();

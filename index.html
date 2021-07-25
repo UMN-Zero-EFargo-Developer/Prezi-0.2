@@ -11,13 +11,20 @@
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.3.1/mapbox-gl.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <link rel='stylesheet' href='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.css' type='text/css' />
+    <script src='https://api.mapbox.com/mapbox-gl-js/plugins/mapbox-gl-draw/v1.3.0/mapbox-gl-draw.js'></script>
+
     <link rel="stylesheet" href="css/base.css">
     <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
     <i class="fas fa-times" id="btnMenu"></i>
-    <div class="filter fixed-position">
+
+    <button id="btnDraw">Draw Lines</button>
+    <button id="btnClearLine">Clear Lines</button>
+    
+    <div class="filter fixed-position hide">
         <select name="factor" id="filterFactor">
             <option value="CO2PerCap" selected>Carbon Emission</option>
             <option value="SDG72">Renewable Energy</option>
@@ -37,7 +44,7 @@
         <button id="btnFilterResult">Show me Data</button>
         <button id="btnRemoveAll">Clear Map</button>
     </div>
-    <div class="legend"></div>
+    <div class="legend hide"></div>
     <div class="float-right-top" id="userInfo">
         <h3></h3>
     </div>
@@ -51,7 +58,7 @@
     </div>
     <div id="map"></div>
 
-
+    <script src="js/domUtil.js"></script>
     <script src="assets/data/powerPlants.js"></script>
     <script src="assets/data/countries.js"></script>
     <script src="assets/data/markerData.js"></script>

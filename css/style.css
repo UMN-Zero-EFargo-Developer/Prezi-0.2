@@ -62,6 +62,18 @@ body {
     z-index: 1000;
 }
 
+
+.player-marker {
+    width: 50px;
+    height: 50px;
+}
+.player-popup, .power-popup {
+    width: 240px;
+    height: 120px;
+    position: relative;
+}
+
+
 @media only screen and (min-width: 600px)  {
     #btnMenu {
         display: none;
@@ -83,4 +95,18 @@ body {
         width: auto;
         margin-bottom: 15px;
     }
+}
+
+#btnDraw {
+    position: fixed;
+    z-index: 1000;
+    top: 60px;
+    right: 10px;
+}
+
+#btnClearLine {
+    position: fixed;
+    z-index: 1000;
+    top: 90px;
+    right: 10px;
 }

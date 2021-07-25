@@ -17,6 +17,7 @@ powerPlants = {
             "SourceType": "power",
             "SourceType": "power",
             "FuelType": "Landfill",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -32,7 +33,8 @@ powerPlants = {
             "Refs": "[9]",
             "YearOpened": "1965",
             "SourceType": "power",
-            "FuelType": "Coal"
+            "FuelType": "Coal",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -47,7 +49,8 @@ powerPlants = {
             "Refs": "[10]",
             "YearOpened": "1990",
             "SourceType": "power",
-            "FuelType": "Coal"
+            "FuelType": "Coal",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -62,7 +65,8 @@ powerPlants = {
             "Refs": "[11]",
             "YearOpened": "1984/1986",
             "SourceType": "power",
-            "FuelType": "Coal"
+            "FuelType": "Coal",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -78,7 +82,8 @@ powerPlants = {
             "YearOpened": "1979/1980",
             "Notes": "retirement in 2022[13]",
             "SourceType": "power",
-            "FuelType": "Coal"
+            "FuelType": "Coal",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -139,7 +144,8 @@ powerPlants = {
             "YearOpened": "1954/1963",
             "Notes": "retirement in 2021[18]",
             "SourceType": "power",
-            "FuelType": "Coal"
+            "FuelType": "Coal",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -239,7 +245,8 @@ powerPlants = {
             "Number OfUnits": "1",
             "Refs": "[22][23]",
             "YearOpened": "2014",
-            "Notes": "originally coal-fired.convert to gas in 2017.[24]"
+            "Notes": "originally coal-fired.convert to gas in 2017.[24]",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -255,7 +262,8 @@ powerPlants = {
             "YearOpened": "1956/1960",
             "Notes": "USACE owned and managed[26]",
             "SourceType": "power",
-            "FuelType": "Hydro"
+            "FuelType": "Hydro",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -272,7 +280,8 @@ powerPlants = {
             "Refs": "[28]",
             "Yearopened": "2008/2009/2010",
             "SourceType": "power",
-            "FuelType": "Wind"
+            "FuelType": "Wind",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -306,7 +315,8 @@ powerPlants = {
             "Refs": "[30][31]",
             "Yearopened": "2010/2012/2015",
             "SourceType": "power",
-            "FuelType": "Wind"
+            "FuelType": "Wind",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -340,7 +350,8 @@ powerPlants = {
             "Refs": "[33]",
             "Yearopened": "2016",
             "SourceType": "power",
-            "FuelType": "Wind"
+            "FuelType": "Wind",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -423,7 +434,8 @@ powerPlants = {
             "Refs": "[27]",
             "Yearopened": "2007/2008",
             "SourceType": "power",
-            "FuelType": "Wind"
+            "FuelType": "Wind",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -474,7 +486,8 @@ powerPlants = {
             "Refs": "[40]",
             "Yearopened": "2018",
             "SourceType": "power",
-            "FuelType": "Wind"
+            "FuelType": "Wind",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -525,7 +538,8 @@ powerPlants = {
             "Refs": "[27]",
             "Yearopened": "2002/2009",
             "SourceType": "power",
-            "FuelType": "Wind"
+            "FuelType": "Wind",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -577,7 +591,8 @@ powerPlants = {
             "Yearopened": "2008",
             "Note": "* portion in North Dakota",
             "SourceType": "power",
-            "FuelType": "Wind"
+            "FuelType": "Wind",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
@@ -626,7 +641,8 @@ powerPlants = {
             "Refs": "[27]",
             "Yearopened": "2005",
             "SourceType": "water",
-            "FuelType": "water-source"
+            "FuelType": "water-source",
+            "connected": true
         },
         "geometry": {
             "type": "Point",
