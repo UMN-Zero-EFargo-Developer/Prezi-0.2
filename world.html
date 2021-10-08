@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+        .video-container {
+            height: 100vh;
+            width: 100%;
+            overflow: hidden;
+        }
+        #bgVideo {
+            width: 100%;
+        }
+        .controller {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+        }
+        .controller button {
+            height: 50px;
+            width: 50px;
+            border-radius: 25px;
+        }
+        .popup {
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+            background-color: white;
+            padding: 60px;
+            border-radius: 10px;
+        }
+        .btn-close {
+            position: absolute;
+            right: 20px;
+            top: 20px;
+        }
+        .btn-close:hover {
+            cursor: pointer;
+        }
+
+        .hide {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="video-container">
+        <video id="bgVideo" controls autoplay muted>
+            <source src="https://firebasestorage.googleapis.com/v0/b/efargo-62eea.appspot.com/o/co2_reduce.mp4?alt=media&token=07ba99ea-f6cd-49fc-8e43-057ab5a4ff89" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+    </div>
+    
+    <div class="controller">
+        <div class="speed-controller">
+            <button id="btnStop">Stop</button>
+            <button class="btn-speed" id="btnPlay" data-speed=1>Play</button>
+            <button class="btn-speed" id="btnPlayX2" data-speed=2>X2</button>
+            <button class="btn-speed" id="btnPlayX4" data-speed=4>X4</button>
+        </div>
+    </div>
+
+    <div class="popup hide">
+        <div class="btn-close">Close</div>
+        <h1>Congradulations!</h1>
+        <h3>You saved the world.</h3>
+    </div>
+
+    <script src="js/world.js"></script>
+</body>
+</html>
